@@ -29,7 +29,7 @@ function capitilizeLetter(string){
     let str = string.split("!");
     str[0] = str[0].charAt(0).toUpperCase()+str[0].slice(1);
     str[1] = str[1].charAt(1).toUpperCase()+str[1].slice(2);
-    let str2 = str.join("!");
+    let str2 = str.join("! ");
     return str2;
 }
 
