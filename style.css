@@ -1,0 +1,46 @@
+body{
+    display: flex;
+    flex-direction: column;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.rules{
+    display: flex;
+    flex-direction: column;
+    background-color: #0077b6;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+    color: #ffffff;
+}
+
+h2{
+    font-size: 30px;
+    color: white;
+    margin-top: -20px;
+}
+
+p {
+    font-size: 20px;
+    color: #caf0f8;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.playArea{
+    display: flex;
+    flex-direction: column;
+    background: #00b4d8;
+}
+
+.choice {
+    display: flex;
+    justify-content: space-evenly;
+}

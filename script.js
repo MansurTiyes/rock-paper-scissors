@@ -126,5 +126,5 @@ function game(){
     console.log(`Opponent Score is ${compWinScore}`);
 }
 
-game();
+//game();
 
