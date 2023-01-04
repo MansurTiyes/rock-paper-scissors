@@ -8,7 +8,7 @@ body{
     display: flex;
     flex-direction: column;
     background-color: #0077b6;
-    height: 500px;
+    height: 1000px;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -26,7 +26,7 @@ h2{
 }
 
 p {
-    font-size: 20px;
+    font-size: 30px;
     color: #caf0f8;
     font-weight: bold;
     margin-top: 50px;
@@ -38,9 +38,77 @@ p {
     display: flex;
     flex-direction: column;
     background: #00b4d8;
+    height: 600px;
 }
 
 .choice {
     display: flex;
     justify-content: space-evenly;
+}
+
+.selectChoice{
+    display: flex;
+    flex-direction: column;
+    border: solid #90e0ef;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    text-align: center;
+    border-width: 5px;
+    gap: 10px;
+    max-width: 400px;
+    border-radius: 30px;
+    padding: 20px;
+}
+
+img {
+    height: 240px;
+    width: 240px;
+}
+
+.playHeader {
+    font-size: 60px;
+    color: white;
+    font-weight: bolder;
+    align-self: center;
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+h3{
+    color: #00b4d8;
+    font-size: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.text{
+    color: #0077b6;
+    font-size: 20px;
+}
+
+ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.resultArea{
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    background-color: #90e0ef;
+    gap: 200px;
+}
+
+.playerScoreArea,
+.computerScoreArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#0077b6;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 50px;
+    gap: 20px;
 }
