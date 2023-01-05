@@ -1,3 +1,8 @@
+let UserInput;
+let ComputerChoice;
+let playerScore = 0;
+let computerScore = 0;
+
 function getRandomNumber(min, max){
     let res = Math.floor(Math.random()*(max-min+1))+min;
     return res;
@@ -19,12 +24,6 @@ function getComputerChoice(){
     return selectedChoice;
 }
 
-function getUserInput() {
-    let input = prompt("Enter your choice: ");
-    input = input.toLowerCase();
-    return input;
-}
-
 function capitilizeLetter(string){
     let str = string.split("!");
     str[0] = str[0].charAt(0).toUpperCase()+str[0].slice(1);
@@ -33,11 +32,44 @@ function capitilizeLetter(string){
     return str2;
 }
 
+function winDisplay(UserInput, ComputerChoice){
+    const messageArea = document.querySelector('.messageArea');
+    const winSentence = document.createElement('div');
+    winSentence.classList.add('message');
+    winSentence.textContent = winMessage(UserInput, ComputerChoice);
+
+    messageArea.appendChild(winSentence);
+}
+
+function loseDisplay(UserInput, ComputerChoice){
+    const messageArea = document.querySelector('.messageArea');
+    const loseSentence = document.createElement('div');
+    loseSentence.classList.add('message');
+    loseSentence.textContent = loseMessage(UserInput, ComputerChoice);
+
+    messageArea.appendChild(loseSentence);
+}
+
+function drawDisplay(){
+    const messageArea = document.querySelector('.messageArea');
+    const drawSentence = document.createElement('div');
+    drawSentence.classList.add('message');
+    drawSentence.textContent = drawMessage();
+
+    messageArea.appendChild(drawSentence);
+}
+
+function messageRemove(){
+    const message = document.querySelector('.message');
+    message.remove();
+}
+
 function winMessage(getUserInput, getComputerChoice){
     let message = `You win! ${getUserInput} beats ${getComputerChoice}`;
     message = capitilizeLetter(message);
     return message;
 }
+
 
 function loseMessage(getUserInput, getComputerChoice){
     let message = `You lose! ${getComputerChoice} beats ${getUserInput}`;
@@ -50,81 +82,105 @@ function drawMessage(){
     return message;
 }
 
-function gameRound(){
-    let win = false;
-    let UserInput = getUserInput();
-    let ComputerChoice = getComputerChoice();
+function lastWinDisplay(){
+    const messageArea = document.querySelector('.messageArea');
+    const lastWinMessage = document.createElement('div');
+    lastWinMessage.classList.add('message');
+    lastWinMessage.textContent = "You Win The Game!";
+
+    messageArea.appendChild(lastWinMessage);
+}
+
+function lastLoseDisplay(){
+    const messageArea = document.querySelector('.messageArea');
+    const lastLoseMessage = document.createElement('div');
+    lastLoseMessage.classList.add('message');
+    lastLoseMessage.textContent = "You Lose The Game!";
+
+    messageArea.appendChild(lastLoseMessage);
+}
+
+function playerScoreUpdate(playerScore){
+    const playerScoreUI = document.querySelector('.playerScoreUI');
+    playerScoreUI.textContent = playerScore;
+}
+
+function computerScoreUpdate(computerScore){
+    const computerScoreUI = document.querySelector('.computerScoreUI');
+    computerScoreUI.textContent = computerScore;
+}
+
+
+
+function gameRound(UserInput, ComputerChoice){
+    messageRemove();
+    ComputerChoice = getComputerChoice();
     if (UserInput=='rock'){
         if (ComputerChoice=='rock'){
-            console.log(drawMessage());
+            drawDisplay();
         }
         else if (ComputerChoice=='paper'){
-            win = false;
-            console.log(loseMessage(UserInput, ComputerChoice));
+            loseDisplay(UserInput, ComputerChoice);
+            computerScore++;
+            computerScoreUpdate(computerScore);
         }
         else {
-            win = true;
-            console.log(winMessage(UserInput, ComputerChoice));
+            winDisplay(UserInput, ComputerChoice);
+            playerScore++;
+            playerScoreUpdate(playerScore);
         }
     }
     else if (UserInput=='paper'){
         if (ComputerChoice=='rock'){
-            win = true;
-            console.log(winMessage(UserInput, ComputerChoice));
+            winDisplay(UserInput, ComputerChoice);
+            playerScore++;
+            playerScoreUpdate(playerScore);
         }
         else if (ComputerChoice=='paper'){
-            console.log(drawMessage());
+            drawDisplay();
         }
         else{
-            win = false;
-            console.log(loseMessage(UserInput, ComputerChoice));
+            loseDisplay(UserInput, ComputerChoice);
+            computerScore++;
+            computerScoreUpdate(computerScore);
         }
     }
     else if (UserInput=='scissors'){
         if (ComputerChoice=='rock'){
-            win = false;
-            console.log(loseMessage(UserInput, ComputerChoice));
+            loseDisplay(UserInput, ComputerChoice);
+            computerScore++;
+            computerScoreUpdate(computerScore);
         }
         else if (ComputerChoice=='paper'){
-            win = true;
-            console.log(winMessage(UserInput, ComputerChoice));
+            winDisplay(UserInput, ComputerChoice);
+            playerScore++;
+            playerScoreUpdate(playerScore);
         }
         else {
-            console.log(drawMessage());
+            drawDisplay();
         }
     }
-    else {
-        win = undefined;
-        //IF win = undefined print to try again
+
+    if (playerScore==5){
+        messageRemove();
+        lastWinDisplay();
     }
-    return win;
+    else if (computerScore==5){
+        messageRemove();
+        lastLoseDisplay();
+    }
 }
 
-function game(){
-    let userWinScore = 0;
-    let compWinScore = 0;
-    for(let i = 0; i<5; i++){
-        let flag = gameRound();
-        if (flag==true){
-            userWinScore++;
-        }
-        else if (flag==undefined){
-            console.log("Please enter the existing option: ");
-            i--;
-        }
-        else{
-            compWinScore++;
-        }
-    }
-    if (userWinScore>compWinScore){
-        console.log("You won!");
-    }
-    else {
-        console.log("You lost!");
-    }
-    console.log(`Your Score is ${userWinScore}`);
-    console.log(`Opponent Score is ${compWinScore}`);
+
+const buttons = document.querySelectorAll('button');
+
+for(let i =0; i<buttons.length; i++){
+    buttons[i].addEventListener('click', function(e){
+        const img = document.querySelectorAll('img');
+        UserInput = img[i].alt;
+
+        gameRound(UserInput, ComputerChoice);
+    });
 }
 
-//game();
 
