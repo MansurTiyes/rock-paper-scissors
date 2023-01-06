@@ -59,6 +59,7 @@ p {
     max-width: 400px;
     border-radius: 30px;
     padding: 20px;
+    transition: all 0.5s ease-out;
 }
 
 img {
@@ -121,6 +122,23 @@ ul {
     font-size: 30px;
     font-weight: bold;
     margin-top: 20px;
-    
-    
+}
+
+.hoverAnimation{
+    max-width: 600px !important;
+}
+
+#resetStyle{
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
+    max-height: 100x;
+    max-width: 150px;
+    padding: 25px;
+    color:#0077b6;
+    background-color: #caf0f8;
+    border-radius: 20px;
+    justify-content: center;
+    align-self: center;
+    margin-top: 20px;
 }

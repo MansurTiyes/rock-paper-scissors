@@ -110,7 +110,30 @@ function computerScoreUpdate(computerScore){
     computerScoreUI.textContent = computerScore;
 }
 
+function addResetButton(){
+    const message = document.querySelector('.message');
+    const resetButton = document.createElement('button');
+    resetButton.setAttribute('id','resetStyle');
+    resetButton.textContent = "RESET";
 
+    message.appendChild(resetButton);
+}
+
+function removeResetButton(){
+    const resetStyle = document.querySelector('#resetStyle');
+    resetStyle.remove();
+}
+
+function resetButtonClickEvent(){
+    const resetStyle = document.querySelector('#resetStyle');
+    resetStyle.addEventListener('click',function(e){
+        playerScore = 0;
+        computerScore = 0;
+        playerScoreUpdate(playerScore);
+        computerScoreUpdate(computerScore);
+        removeResetButton();
+    });
+}
 
 function gameRound(UserInput, ComputerChoice){
     messageRemove();
@@ -164,18 +187,36 @@ function gameRound(UserInput, ComputerChoice){
     if (playerScore==5){
         messageRemove();
         lastWinDisplay();
+        addResetButton();
+        resetButtonClickEvent();
     }
     else if (computerScore==5){
         messageRemove();
         lastLoseDisplay();
+        addResetButton();
+        resetButtonClickEvent();
     }
 }
 
 
 const buttons = document.querySelectorAll('button');
 
+for (let i = 0; i<buttons.length; i++){
+    buttons[i].addEventListener('mouseenter', function(e){
+        this.classList.add('hoverAnimation');
+    })
+    buttons[i].addEventListener('mouseleave', function(e){
+        setTimeout(function(){
+            this.classList.remove('hoverAnimation');
+        }.bind(this),100)
+    })
+}
+
 for(let i =0; i<buttons.length; i++){
     buttons[i].addEventListener('click', function(e){
+        const sound = document.querySelector('.sound');
+        sound.currentTime = 0;
+        sound.play();
         const img = document.querySelectorAll('img');
         UserInput = img[i].alt;
 
